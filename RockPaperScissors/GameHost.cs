@@ -16,12 +16,12 @@ namespace RockPaperScissors
 
         public async Task StartAsync(CancellationToken cancellationToken = default)
         {
-            await _gameStateManager.ChangeState(GameState.Starting);
+            await _gameStateManager.ChangeFlowState(GameFlowState.Starting);
         }
 
         public async Task StopAsync(CancellationToken cancellationToken = default)
         {
-            await _gameStateManager.ChangeState(GameState.Stopping);
+            await _gameStateManager.ChangeFlowState(GameFlowState.Stopping);
         }
     }
 }

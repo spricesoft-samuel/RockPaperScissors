@@ -3,21 +3,21 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissors.StateManagers
 {
-    public class StartingState : IStateManager
+    public class StartingFlowStateManager : IStateManager
     {
         private readonly IOutputDevice _outputDevice;
 
-        public StartingState(IOutputDevice outputDevice)
+        public StartingFlowStateManager(IOutputDevice outputDevice)
         {
             _outputDevice = outputDevice;
         }
 
-        public GameState ManagedState => GameState.Starting;
+        public GameFlowState ManagedState => GameFlowState.Starting;
 
-        public async Task<GameState> EnterState()
+        public async Task<GameFlowState> EnterState()
         {
             await _outputDevice.WriteText(GameResources.WelcomeBanner);
-            return GameState.Stopping;
+            return GameFlowState.WaitingForConfiguration;
         }
     }
 }

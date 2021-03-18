@@ -7,28 +7,28 @@ namespace RockPaperScissors
     public class GameStateManager : IGameStateManager
     {
         private readonly IStateChangeManagerRepository _stateRepository;
-        private GameState _gameState;
+        private GameFlowState _gameFlowState;
 
         public GameStateManager(
             IStateChangeManagerRepository stateRepository)
         {
-            _gameState = GameState.Unset;
+            _gameFlowState = GameFlowState.Unset;
             _stateRepository = stateRepository;
         }
 
-        public async Task ChangeState(GameState state)
+        public async Task ChangeFlowState(GameFlowState state)
         {
-            _gameState = state;
-            while(_gameState != GameState.Stopping)
+            _gameFlowState = state;
+            while(_gameFlowState != GameFlowState.Stopped)
             {
                 var stateManager = await _stateRepository.GetStateManager(state);
-                _gameState = await stateManager.EnterState();
+                _gameFlowState = await stateManager.EnterState();
             }
         }
 
-        public Task<GameState> GetState()
+        public Task<GameFlowState> GetFlowState()
         {
-            return Task.FromResult(_gameState);
+            return Task.FromResult(_gameFlowState);
         }
     }
 }

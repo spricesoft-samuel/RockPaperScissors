@@ -15,7 +15,7 @@ namespace RockPaperScissors
             _states = states;
         }
 
-        public Task<IStateManager> GetStateManager(GameState state)
+        public Task<IStateManager> GetStateManager(GameFlowState state)
         {
             var stateManager = _states.FirstOrDefault(i => i.ManagedState == state);
             if (stateManager == null)

@@ -5,6 +5,6 @@ namespace RockPaperScissors.Interfaces
 {
     public interface IStateChangeManagerRepository
     {
-        Task<IStateManager> GetStateManager(GameState state);
+        Task<IStateManager> GetStateManager(GameFlowState state);
     }
 }

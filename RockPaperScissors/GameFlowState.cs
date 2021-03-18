@@ -4,11 +4,12 @@ using System.Text;
 
 namespace RockPaperScissors
 {
-    public enum GameState
+    public enum GameFlowState
     {
         Unset = 0,
         Starting,
         WaitingForConfiguration,
-        Stopping
+        Stopping,
+        Stopped
     }
 }

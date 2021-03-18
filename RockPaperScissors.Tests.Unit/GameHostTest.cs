@@ -18,11 +18,11 @@ namespace RockPaperScissors.Tests.Unit
             await sut.StartAsync();
 
             // Assert
-            stateManager.Verify(i => i.ChangeState(GameState.Starting), Times.Once);
+            stateManager.Verify(i => i.ChangeFlowState(GameFlowState.Starting), Times.Once);
         }
 
         [Test]
-        public async Task StopAsync_ChangesState_to_stop()
+        public async Task StopAsync_ChangesState_to_stopping()
         {
             // Arrange
             var stateManager = new Mock<IGameStateManager>();
@@ -32,7 +32,7 @@ namespace RockPaperScissors.Tests.Unit
             await sut.StopAsync();
 
             // Assert
-            stateManager.Verify(i => i.ChangeState(GameState.Stopping), Times.Once);
+            stateManager.Verify(i => i.ChangeFlowState(GameFlowState.Stopping), Times.Once);
         }
     }
 }

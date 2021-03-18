@@ -3,11 +3,11 @@ using RockPaperScissors.Interfaces;
 
 namespace RockPaperScissors.StateManagers
 {
-    public static class StateManagerRegistry
+    public static class FlowStateManagerRegistry
     {
         public static void RegisterStateManagers(this IServiceCollection services)
         {
-            services.AddTransient<IStateManager, StartingState>();
+            services.AddTransient<IStateManager, StartingFlowStateManager>();
         }
     }
 }

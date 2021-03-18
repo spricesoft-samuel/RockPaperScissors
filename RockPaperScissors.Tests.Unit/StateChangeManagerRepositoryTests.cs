@@ -12,9 +12,9 @@ namespace RockPaperScissors.Tests.Unit
         {
             // Arrange
             var mockStartingStateManager = new Mock<IStateManager>();
-            mockStartingStateManager.SetupGet(i => i.ManagedState).Returns(GameState.Starting);
+            mockStartingStateManager.SetupGet(i => i.ManagedState).Returns(GameFlowState.Starting);
             var mockStoppingStateManager = new Mock<IStateManager>();
-            mockStoppingStateManager.SetupGet(i => i.ManagedState).Returns(GameState.Stopping);
+            mockStoppingStateManager.SetupGet(i => i.ManagedState).Returns(GameFlowState.Stopping);
             var sut = new StateChangeManagerRepository(new[] 
             {
                 mockStartingStateManager.Object,
@@ -22,7 +22,7 @@ namespace RockPaperScissors.Tests.Unit
             });
 
             // Act
-            var result = await sut.GetStateManager(GameState.Starting);
+            var result = await sut.GetStateManager(GameFlowState.Starting);
 
             // Assert
             Assert.AreEqual(result, mockStartingStateManager.Object);
