@@ -7,21 +7,21 @@ namespace RockPaperScissors
 {
     public class GameHost : IHostedService
     {
-        private readonly IOutputDevice _outputDevice;
+        private readonly IGameStateManager _gameStateManager;
 
-        public GameHost(IOutputDevice outputDevice)
+        public GameHost(IGameStateManager gameStateManager)
         {
-            _outputDevice = outputDevice;
+            _gameStateManager = gameStateManager;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken = default)
         {
-            await _outputDevice.WriteText("Testing the app runs");
+            await _gameStateManager.ChangeState(GameState.Starting);
         }
 
         public async Task StopAsync(CancellationToken cancellationToken = default)
         {
-            await _outputDevice.WriteText("Testing the app has stopped");
+            await _gameStateManager.ChangeState(GameState.Stopped);
         }
     }
 }

@@ -5,7 +5,9 @@ using Microsoft.Extensions.Logging;
 using RockPaperScissors.Interfaces;
 using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+[assembly:InternalsVisibleTo("RockPaperScissors.Tests.Unit")]
 
 namespace RockPaperScissors
 {
@@ -23,7 +25,9 @@ namespace RockPaperScissors
             return Host.CreateDefaultBuilder(args).ConfigureServices(services =>
             {
                 services.AddHostedService<GameHost>();
-                services.AddSingleton<IOutputDevice, ConsoleOutputDevice>(); 
+                services.AddSingleton<IOutputDevice, ConsoleOutputDevice>();
+                services.AddSingleton<IStateChangeOutputMatrix, InMemoryStateChangeOutputMatrix>();
+                services.AddSingleton<IGameStateManager, GameStateManager>();
 
                 var configbuilder = new ConfigurationBuilder()
                     .SetBasePath(Path.Combine(AppContext.BaseDirectory))
