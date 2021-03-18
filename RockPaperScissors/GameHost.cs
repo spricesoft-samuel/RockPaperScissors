@@ -21,7 +21,7 @@ namespace RockPaperScissors
 
         public async Task StopAsync(CancellationToken cancellationToken = default)
         {
-            await _gameStateManager.ChangeState(GameState.Stopped);
+            await _gameStateManager.ChangeState(GameState.Stopping);
         }
     }
 }

@@ -9,6 +9,6 @@ namespace RockPaperScissors
         Unset = 0,
         Starting,
         WaitingForConfiguration,
-        Stopped
+        Stopping
     }
 }

@@ -1,28 +1,29 @@
 ﻿using RockPaperScissors.Interfaces;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RockPaperScissors
 {
     public class GameStateManager : IGameStateManager
     {
-        private readonly IOutputDevice _outputDevice;
-        private readonly IStateChangeOutputMatrix _stateChangeOutputMatrix;
+        private readonly IStateChangeManagerRepository _stateRepository;
         private GameState _gameState;
 
         public GameStateManager(
-            IOutputDevice outputDevice,
-            IStateChangeOutputMatrix stateChangeOutputMatrix)
+            IStateChangeManagerRepository stateRepository)
         {
             _gameState = GameState.Unset;
-            _outputDevice = outputDevice;
-            _stateChangeOutputMatrix = stateChangeOutputMatrix;
+            _stateRepository = stateRepository;
         }
 
         public async Task ChangeState(GameState state)
         {
             _gameState = state;
-            var stateChangeText = await _stateChangeOutputMatrix.GetOutputForNewState(state);
-            await _outputDevice.WriteText(stateChangeText);
+            while(_gameState != GameState.Stopping)
+            {
+                var stateManager = await _stateRepository.GetStateManager(state);
+                _gameState = await stateManager.EnterState();
+            }
         }
 
         public Task<GameState> GetState()

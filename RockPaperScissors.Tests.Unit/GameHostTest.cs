@@ -32,7 +32,7 @@ namespace RockPaperScissors.Tests.Unit
             await sut.StopAsync();
 
             // Assert
-            stateManager.Verify(i => i.ChangeState(GameState.Stopped), Times.Once);
+            stateManager.Verify(i => i.ChangeState(GameState.Stopping), Times.Once);
         }
     }
 }
