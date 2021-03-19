@@ -7,6 +7,7 @@
         ChooseNumberOfPlayers,
         EnterPlayerNames,
         ChooseHand,
+        DeclareResult,
         Stopping,
         Stopped,
     }

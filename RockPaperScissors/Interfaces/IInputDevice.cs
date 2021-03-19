@@ -6,7 +6,7 @@ namespace RockPaperScissors.Interfaces
     public interface IInputDevice
     {
         Task<int> GetNumberOfPlayers();
-        Task<HandType> GetHandInput();
+        Task<HandType> GetHandInput(Player player);
         Task<string> GetPlayerName(Player player);
     }
 }

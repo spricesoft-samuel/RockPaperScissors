@@ -25,7 +25,8 @@ namespace RockPaperScissors.StateManagers
 
         public async Task<GameFlowState> EnterState()
         {
-            while(_gameState.PlayersTurn < 2)
+            _gameState.PlayersTurn = 0;
+            while (_gameState.PlayersTurn < 2)
             {
                 var player = _gameState.Players[_gameState.PlayersTurn];
                 if (player.IsCpu)
@@ -35,7 +36,7 @@ namespace RockPaperScissors.StateManagers
                 else
                 {
                     await _outputDevice.PromptPlayerToChooseHand(player);
-                    player.HandType = await _inputDevice.GetHandInput();
+                    player.HandType = await _inputDevice.GetHandInput(player);
                 }
                 _gameState.PlayersTurn += 1;
             }

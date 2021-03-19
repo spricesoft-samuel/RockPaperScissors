@@ -36,7 +36,7 @@ namespace RockPaperScissors.IO
             return (int)char.GetNumericValue(key);
         }
 
-        public async Task<HandType> GetHandInput()
+        public async Task<HandType> GetHandInput(Player player)
         {
             var key = await GetKeyInput(true, 'R', 'P', 'S', 'r', 'p', 's');
             return CharHandMap[key];
