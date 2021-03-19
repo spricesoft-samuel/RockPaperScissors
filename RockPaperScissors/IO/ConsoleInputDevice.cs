@@ -26,7 +26,7 @@ namespace RockPaperScissors.IO
             { 'Y', true },
             { 'y', true },
             { 'N', false },
-            { 'N', false },
+            { 'n', false },
         };
 
         public ConsoleInputDevice(

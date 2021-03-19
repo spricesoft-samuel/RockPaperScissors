@@ -20,6 +20,7 @@ namespace RockPaperScissors
             services.AddSingleton<IInputDevice, ConsoleInputDevice>();
             services.AddSingleton<IStateChangeManagerRepository, StateChangeManagerRepository>();
             services.AddSingleton<IGameStateManager, GameStateManager>();
+            services.AddSingleton<IResultProcessor, ResultProcessor>();
             services.RegisterStateManagers();
 
             var configbuilder = new ConfigurationBuilder()
