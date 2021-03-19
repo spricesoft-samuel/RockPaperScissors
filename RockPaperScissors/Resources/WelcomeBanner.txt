@@ -1,5 +1,4 @@
 ﻿Welcome to Rock Paper Scissors
-Press Ctrl+C to end at any time
 
 Game Rules:
 
