@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace RockPaperScissors.IO
 {
     // Todo: dont block ctrl-c when taking input
+    // We could write tests for this class if we used a shim for Console
     public class ConsoleInputDevice : IInputDevice
     {
         private readonly IOutputDevice _outputDevice;
@@ -45,7 +46,7 @@ namespace RockPaperScissors.IO
 
         public async Task<HandType> GetHandInput(Player player)
         {
-            var key = await GetKeyInput(true, 'R', 'P', 'S', 'r', 'p', 's');
+            var key = await GetKeyInput(true, CharHandMap.Keys.ToArray());
             return CharHandMap[key];
         }
 
@@ -80,7 +81,7 @@ namespace RockPaperScissors.IO
 
         public async Task<bool> CheckForNewGame()
         {
-            var key = await GetKeyInput(false, 'Y', 'N', 'y', 'n');
+            var key = await GetKeyInput(false, YesNoBoolMap.Keys.ToArray());
             return YesNoBoolMap[key];
         }
     }
