@@ -21,7 +21,7 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
 
             // Assert
             Assert.AreEqual(GameFlowState.ChooseNumberOfPlayers, result);
-            outputDevice.Verify(i => i.WriteText(GameResources.WelcomeBanner));
+            outputDevice.Verify(i => i.WelcomeThePlayers());
         }
     }
 }

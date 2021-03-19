@@ -6,6 +6,7 @@
         Starting,
         ChooseNumberOfPlayers,
         EnterPlayerNames,
+        ChooseHand,
         Stopping,
         Stopped,
     }

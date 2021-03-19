@@ -1,16 +1,26 @@
 ﻿using RockPaperScissors.Interfaces;
 using RockPaperScissors.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace RockPaperScissors.IO
 {
+    // Todo: dont block ctrl-c when taking input
     public class ConsoleInputDevice : IInputDevice
     {
         private readonly IOutputDevice _outputDevice;
         private readonly GameState _gameState;
-        private bool _ctrlCpressed;
+        private static readonly Dictionary<char, HandType> CharHandMap = new Dictionary<char, HandType>
+        {
+            { 'R', HandType.Rock },
+            { 'P', HandType.Paper },
+            { 'S', HandType.Scissors },
+            { 'r', HandType.Rock },
+            { 'p', HandType.Paper },
+            { 's', HandType.Scissors },
+        };
 
         public ConsoleInputDevice(
             IOutputDevice outputDevice,
@@ -18,33 +28,47 @@ namespace RockPaperScissors.IO
         {
             _outputDevice = outputDevice;
             _gameState = gameState;
-
-            Console.CancelKeyPress += new ConsoleCancelEventHandler(CtrlC_Handler);
         }
 
-        private void CtrlC_Handler(object sender, ConsoleCancelEventArgs e)
+        public async Task<int> GetNumberOfPlayers()
         {
-            _ctrlCpressed = true;
+            var key = await GetKeyInput(false, '1', '2');
+            return (int)char.GetNumericValue(key);
         }
 
-        public async Task<string> GetUserInput(params string[] validResponses)
+        public async Task<HandType> GetHandInput()
+        {
+            var key = await GetKeyInput(true, 'R', 'P', 'S', 'r', 'p', 's');
+            return CharHandMap[key];
+        }
+
+        public async Task<string> GetPlayerName(Player player)
+        {
+            await _outputDevice.PromptToEnterPlayerName(player.Number);
+
+            return Console.ReadLine();
+        }
+
+        private async Task<char> GetKeyInput(bool hide, params char[] validInputs)
         {
             bool isValidResponse;
-            string responseText;
+            char responseChar;
             do
             {
-                responseText = Console.ReadLine();
-                isValidResponse = !validResponses.Any() || validResponses.Contains(responseText);
+                responseChar = Console.ReadKey(hide).KeyChar;
+                Console.WriteLine();
+                isValidResponse = !validInputs.Any() || validInputs.Contains(responseChar);
                 if (isValidResponse != true)
                 {
-                    await _outputDevice.WriteText("Invalid input, please enter one of the following:" +
-                        string.Join(" or ", validResponses));
+                    await _outputDevice.DisplayInputError(
+                        GameResources.InvalidInputText,
+                        string.Join(" or ", validInputs));
                 }
 
-            } while (isValidResponse == false && 
+            } while (isValidResponse == false &&
                     !_gameState.CancellationToken.IsCancellationRequested);
 
-            return responseText;
+            return responseChar;
         }
     }
 }

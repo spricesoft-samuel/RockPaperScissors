@@ -17,7 +17,7 @@ namespace RockPaperScissors.StateManagers
 
         public Task<GameFlowState> EnterState()
         {
-            _outputDevice.WriteText(GameResources.EndBanner);
+            _outputDevice.SayGoodBye();
             return Task.FromResult(GameFlowState.Stopped);
         }
     }

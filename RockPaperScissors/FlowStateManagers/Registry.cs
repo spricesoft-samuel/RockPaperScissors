@@ -3,7 +3,7 @@ using RockPaperScissors.Interfaces;
 
 namespace RockPaperScissors.StateManagers
 {
-    public static class FlowStateManagerRegistry
+    public static class Registry
     {
         public static void RegisterStateManagers(this IServiceCollection services)
         {
@@ -11,6 +11,7 @@ namespace RockPaperScissors.StateManagers
             services.AddTransient<IFlowStateManager, StoppingFlowStateManager>();
             services.AddTransient<IFlowStateManager, ChoosePlayerNumberStateManager>();
             services.AddTransient<IFlowStateManager, EnterPlayerNamesStateManager>();
+            services.AddTransient<IFlowStateManager, ChooseHandStateManager>();
         }
     }
 }

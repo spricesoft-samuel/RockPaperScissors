@@ -16,7 +16,7 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
             var sampleName = "sample name";
             var gameState = new GameState { NumberOfPlayers = 1 };
             var inputDevice = new Mock<IInputDevice>();
-            inputDevice.Setup(i => i.GetUserInput()).ReturnsAsync(sampleName);
+            inputDevice.Setup(i => i.GetPlayerName(It.IsAny<Player>())).ReturnsAsync(sampleName);
             var outputDevice = new Mock<IOutputDevice>();
             var sut = new EnterPlayerNamesStateManager(inputDevice.Object, outputDevice.Object, gameState);
 
@@ -24,11 +24,11 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
             var result = await sut.EnterState();
 
             // Assert
-            outputDevice.Verify(i => i.WriteText(GameResources.EnterNames, new[] { "1" }));
-            inputDevice.Verify(i => i.GetUserInput());
-            Assert.AreEqual(1, gameState.Players.Length);
+            inputDevice.Verify(i => i.GetPlayerName(gameState.Players[0]));
+            outputDevice.Verify(i => i.AdvisePlayer2IsCpu());
+            Assert.AreEqual(2, gameState.Players.Length);
             Assert.AreEqual(sampleName, gameState.Players[0].Name);
-            Assert.AreEqual(GameFlowState.Stopping, result);
+            Assert.AreEqual(GameFlowState.ChooseHand, result);
         }
         [Test]
         public async Task EnterState_TwoPlayers()
@@ -38,7 +38,7 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
             var playerNameCount = -1;
             var gameState = new GameState { NumberOfPlayers = 2 };
             var inputDevice = new Mock<IInputDevice>();
-            inputDevice.Setup(i => i.GetUserInput())
+            inputDevice.Setup(i => i.GetPlayerName(It.IsAny<Player>()))
                 .Callback(() => playerNameCount++)
                 .ReturnsAsync(() => sampleNames[playerNameCount]);
             var outputDevice = new Mock<IOutputDevice>();
@@ -48,13 +48,12 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
             var result = await sut.EnterState();
 
             // Assert
-            outputDevice.Verify(i => i.WriteText(GameResources.EnterNames, new[] { "1" }));
-            outputDevice.Verify(i => i.WriteText(GameResources.EnterNames, new[] { "2" }));
-            inputDevice.Verify(i => i.GetUserInput());
+            inputDevice.Verify(i => i.GetPlayerName(gameState.Players[0]));
+            inputDevice.Verify(i => i.GetPlayerName(gameState.Players[1]));
             Assert.AreEqual(2, gameState.Players.Length);
             Assert.AreEqual(sampleNames[0], gameState.Players[0].Name);
             Assert.AreEqual(sampleNames[1], gameState.Players[1].Name);
-            Assert.AreEqual(GameFlowState.Stopping, result);
+            Assert.AreEqual(GameFlowState.ChooseHand, result);
         }
     }
 }

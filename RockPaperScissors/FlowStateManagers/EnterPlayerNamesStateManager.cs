@@ -25,18 +25,21 @@ namespace RockPaperScissors.StateManagers
 
         public async Task<GameFlowState> EnterState()
         {
-            _gameState.Players = Enumerable.Range(1, _gameState.NumberOfPlayers)
-                .Select(i => new Player()).ToArray();
+            _gameState.Players = new[] { new Player { Number = 1 }, new Player { Number = 2 } };
 
             for (var i = 0; i < _gameState.NumberOfPlayers; i++)
             {
-                await _outputDevice.WriteText(GameResources.EnterNames, (i + 1).ToString());
-
-                _gameState.Players[i].Name = await _inputDevice.GetUserInput();
-
+                _gameState.Players[i].Name = await _inputDevice.GetPlayerName(_gameState.Players[i]);
             }
-            
-            return GameFlowState.Stopping;
+
+            if (_gameState.NumberOfPlayers == 1)
+            {
+                await _outputDevice.AdvisePlayer2IsCpu();
+                _gameState.Players[1].IsCpu = true;
+                _gameState.Players[1].Name = "CPU";
+            }
+
+            return GameFlowState.ChooseHand;
         }
     }
 }

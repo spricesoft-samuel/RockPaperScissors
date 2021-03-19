@@ -24,12 +24,10 @@ namespace RockPaperScissors.StateManagers
 
         public async Task<GameFlowState> EnterState()
         {
-            await _outputDevice.WriteText(GameResources.ChoosePlayerNumbers);
+            await _outputDevice.PromptToChooseNumberOfPlayers();
 
-            var input = await _inputDevice.GetUserInput("1", "2");
-            var asInt = int.Parse(input);
-            _gameState.NumberOfPlayers = asInt;
-
+            var input = await _inputDevice.GetNumberOfPlayers();
+            _gameState.NumberOfPlayers = input;
 
             return GameFlowState.EnterPlayerNames;
         }

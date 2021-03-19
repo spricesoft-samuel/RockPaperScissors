@@ -8,5 +8,6 @@ namespace RockPaperScissors.Models
         public CancellationToken CancellationToken { get; set; }
         public int NumberOfPlayers { get; set; }
         public Player[] Players { get; set; }
+        public int PlayersTurn { get; set; }
     }
 }

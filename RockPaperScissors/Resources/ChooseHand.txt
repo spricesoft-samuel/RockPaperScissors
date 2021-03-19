@@ -1,0 +1,2 @@
+{0}: Please press a key to indicate your next hand.
+Key: R = Rock, P = Paper, S = Scissors

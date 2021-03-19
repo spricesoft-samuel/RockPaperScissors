@@ -61,6 +61,17 @@ namespace RockPaperScissors {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: Please press a key to indicate your next hand.
+        ///Key: R = Rock, P = Paper, S = Scissors
+        ///.
+        /// </summary>
+        internal static string ChooseHand {
+            get {
+                return ResourceManager.GetString("ChooseHand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter the number of players, 1 or 2?
         ///.
         /// </summary>
@@ -86,6 +97,25 @@ namespace RockPaperScissors {
         internal static string EnterNames {
             get {
                 return ResourceManager.GetString("EnterNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid input, please enter one of the following: {0}.
+        /// </summary>
+        internal static string InvalidInputText {
+            get {
+                return ResourceManager.GetString("InvalidInputText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player 2 will be the CPU
+        ///.
+        /// </summary>
+        internal static string Player2isCPU {
+            get {
+                return ResourceManager.GetString("Player2isCPU", resourceCulture);
             }
         }
         

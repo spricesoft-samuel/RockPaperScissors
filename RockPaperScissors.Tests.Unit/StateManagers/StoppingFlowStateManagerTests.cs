@@ -21,7 +21,7 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
 
             // Assert
             Assert.AreEqual(GameFlowState.Stopped, result);
-            outputDevice.Verify(i => i.WriteText(GameResources.EndBanner));
+            outputDevice.Verify(i => i.SayGoodBye());
         }
     }
 }

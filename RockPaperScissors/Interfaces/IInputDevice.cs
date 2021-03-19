@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using RockPaperScissors.Models;
 using System.Threading.Tasks;
 
 namespace RockPaperScissors.Interfaces
 {
     public interface IInputDevice
     {
-        Task<string> GetUserInput(params string[] validResponses);
+        Task<int> GetNumberOfPlayers();
+        Task<HandType> GetHandInput();
+        Task<string> GetPlayerName(Player player);
     }
 }
