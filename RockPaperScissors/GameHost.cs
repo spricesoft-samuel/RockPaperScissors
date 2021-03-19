@@ -14,6 +14,7 @@ namespace RockPaperScissors
             _gameStateManager = gameStateManager;
         }
 
+        // not much point testing this
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _gameStateManager.Start(stoppingToken);

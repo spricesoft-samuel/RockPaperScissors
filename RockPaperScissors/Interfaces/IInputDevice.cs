@@ -5,6 +5,6 @@ namespace RockPaperScissors.Interfaces
 {
     public interface IInputDevice
     {
-        Task<int> GetUserInput(params int[] validResponses);
+        Task<string> GetUserInput(params string[] validResponses);
     }
 }

@@ -61,7 +61,8 @@ namespace RockPaperScissors {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the number of players, 1 or 2?.
+        ///   Looks up a localized string similar to Please enter the number of players, 1 or 2?
+        ///.
         /// </summary>
         internal static string ChoosePlayerNumbers {
             get {
@@ -76,6 +77,15 @@ namespace RockPaperScissors {
         internal static string EndBanner {
             get {
                 return ResourceManager.GetString("EndBanner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the name for player {0}.
+        /// </summary>
+        internal static string EnterNames {
+            get {
+                return ResourceManager.GetString("EnterNames", resourceCulture);
             }
         }
         

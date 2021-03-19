@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace RockPaperScissors
+namespace RockPaperScissors.IO
 {
     public class ConsoleOutputDevice : IOutputDevice
     {
@@ -10,6 +10,12 @@ namespace RockPaperScissors
         public Task WriteText(string text)
         {
             Console.WriteLine(text);
+            return Task.CompletedTask;
+        }
+
+        public Task WriteText(string template, params string[] arguments)
+        {
+            Console.WriteLine(template, arguments);
             return Task.CompletedTask;
         }
     }

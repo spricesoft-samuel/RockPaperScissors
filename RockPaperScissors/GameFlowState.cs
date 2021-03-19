@@ -5,6 +5,7 @@
         Unset = 0,
         Starting,
         ChooseNumberOfPlayers,
+        EnterPlayerNames,
         Stopping,
         Stopped,
     }

@@ -124,6 +124,9 @@
   <data name="EndBanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\EndBanner.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="EnterNames" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\EnterNames.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="WelcomeBanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\WelcomeBanner.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>

@@ -4,12 +4,13 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RockPaperScissors
+namespace RockPaperScissors.IO
 {
     public class ConsoleInputDevice : IInputDevice
     {
         private readonly IOutputDevice _outputDevice;
         private readonly GameState _gameState;
+        private bool _ctrlCpressed;
 
         public ConsoleInputDevice(
             IOutputDevice outputDevice,
@@ -17,19 +18,23 @@ namespace RockPaperScissors
         {
             _outputDevice = outputDevice;
             _gameState = gameState;
+
+            Console.CancelKeyPress += new ConsoleCancelEventHandler(CtrlC_Handler);
         }
 
-
-        public async Task<int> GetUserInput(params int[] validResponses)
+        private void CtrlC_Handler(object sender, ConsoleCancelEventArgs e)
         {
-            int userResponse;
+            _ctrlCpressed = true;
+        }
+
+        public async Task<string> GetUserInput(params string[] validResponses)
+        {
             bool isValidResponse;
+            string responseText;
             do
             {
-                // Todo: Console.Readline/readkey seems to swallow ctrl-c until an input is received.
-                var responseKey = Console.ReadKey(true).KeyChar;
-                userResponse = (int)char.GetNumericValue(responseKey);
-                isValidResponse = validResponses.Contains(userResponse);
+                responseText = Console.ReadLine();
+                isValidResponse = !validResponses.Any() || validResponses.Contains(responseText);
                 if (isValidResponse != true)
                 {
                     await _outputDevice.WriteText("Invalid input, please enter one of the following:" +
@@ -39,7 +44,7 @@ namespace RockPaperScissors
             } while (isValidResponse == false && 
                     !_gameState.CancellationToken.IsCancellationRequested);
 
-            return userResponse;
+            return responseText;
         }
     }
 }

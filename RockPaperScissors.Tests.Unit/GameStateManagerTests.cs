@@ -86,16 +86,15 @@ namespace RockPaperScissors.Tests.Unit
         public async Task GameStateManger_GetFlowState_ReturnsPreviouslySetState(GameFlowState testState)
         {
             // Arrange
-            var state = new GameState();
-            state.FlowState = GameFlowState.Unset;
+            var savedGameFlowState = new GameFlowState();
             var stateRepository = new Mock<IStateChangeManagerRepository>();
             var mockStateManager = new Mock<IFlowStateManager>();
             stateRepository.Setup(i => i.GetStateManager(It.IsAny<GameFlowState>())).ReturnsAsync(mockStateManager.Object);
-            var sut = new GameStateManager(stateRepository.Object, state);
+            var sut = new GameStateManager(stateRepository.Object, new GameState());
             mockStateManager.Setup(i => i.EnterState())
                 .Callback(async () => 
                 {
-                    state.FlowState = await sut.GetFlowState();
+                    savedGameFlowState = await sut.GetFlowState();
                 })
                 .ReturnsAsync(GameFlowState.Stopped);
 
@@ -105,7 +104,7 @@ namespace RockPaperScissors.Tests.Unit
             await sut.GetFlowState();
 
             // Assert
-            Assert.AreEqual(testState, state.FlowState);
+            Assert.AreEqual(testState, savedGameFlowState);
         }
     }
 }
