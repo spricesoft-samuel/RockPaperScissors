@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissors.IO
 {
+    // we could test this class if we added a shim for console.
     public class ConsoleOutputDevice : IOutputDevice
     {
         public Task AdvisePlayer2IsCpu()
@@ -13,9 +14,27 @@ namespace RockPaperScissors.IO
             return Task.CompletedTask;
         }
 
+        public Task DeclareResult(GameResult gameResult)
+        {
+            Console.WriteLine(GameResources.DeclareResults,
+                gameResult.Players[0].Name,
+                gameResult.Players[0].HandType,
+                gameResult.Players[1].Name,
+                gameResult.Players[1].HandType,
+                gameResult.ResultReason,
+                gameResult.WinningPlayerName);
+            return Task.CompletedTask;
+        }
+
         public Task DisplayInputError(string errorTemplate, params object[] errorArgs)
         {
             Console.WriteLine(errorTemplate, errorArgs);
+            return Task.CompletedTask;
+        }
+
+        public Task PromptForNewGame()
+        {
+            Console.WriteLine(GameResources.PlayAgainPrompt);
             return Task.CompletedTask;
         }
 

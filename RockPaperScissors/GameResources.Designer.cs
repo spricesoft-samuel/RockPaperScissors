@@ -82,6 +82,25 @@ namespace RockPaperScissors {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player {0} chose {1},
+        ///Player {2} chose {3}
+        ///
+        ///{4}
+        ///
+        ///So the winner is...
+        ///
+        ///Player {5}
+        ///
+        ///
+        ///.
+        /// </summary>
+        internal static string DeclareResults {
+            get {
+                return ResourceManager.GetString("DeclareResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thanks for playing!
         ///.
         /// </summary>
@@ -106,6 +125,17 @@ namespace RockPaperScissors {
         internal static string InvalidInputText {
             get {
                 return ResourceManager.GetString("InvalidInputText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to play again?
+        ///(Y or N)
+        ///.
+        /// </summary>
+        internal static string PlayAgainPrompt {
+            get {
+                return ResourceManager.GetString("PlayAgainPrompt", resourceCulture);
             }
         }
         

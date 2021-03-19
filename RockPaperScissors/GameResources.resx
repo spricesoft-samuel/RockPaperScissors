@@ -124,6 +124,9 @@
   <data name="ChoosePlayerNumbers" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\ChoosePlayerNumbers.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="DeclareResults" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\DeclareResults.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="EndBanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\EndBanner.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
@@ -132,6 +135,9 @@
   </data>
   <data name="InvalidInputText" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\InvalidInputText.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="PlayAgainPrompt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\PlayAgainPrompt.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="Player2isCPU" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Player2isCPU.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>

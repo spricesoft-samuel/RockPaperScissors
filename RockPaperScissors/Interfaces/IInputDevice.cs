@@ -8,5 +8,6 @@ namespace RockPaperScissors.Interfaces
         Task<int> GetNumberOfPlayers();
         Task<HandType> GetHandInput(Player player);
         Task<string> GetPlayerName(Player player);
+        Task<bool> CheckForNewGame();
     }
 }

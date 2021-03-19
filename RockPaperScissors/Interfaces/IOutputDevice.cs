@@ -12,5 +12,8 @@ namespace RockPaperScissors.Interfaces
         Task PromptToChooseNumberOfPlayers();
         Task AdvisePlayer2IsCpu();
         Task DisplayInputError(string errorTemplate, params object[] errorArgs);
+
+        Task DeclareResult(GameResult gameResult);
+        Task PromptForNewGame();
     }
 }

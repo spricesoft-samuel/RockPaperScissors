@@ -89,7 +89,7 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
         {
 
             // Act
-            // try 500 times
+            // try 500 times, we should expect to find at least one of each type over 500 plays
             var results = await Task.WhenAll(
                 Enumerable.Range(1, 500)
                 .Select(i => RunRandTest())

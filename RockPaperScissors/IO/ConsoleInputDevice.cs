@@ -21,6 +21,13 @@ namespace RockPaperScissors.IO
             { 'p', HandType.Paper },
             { 's', HandType.Scissors },
         };
+        private static readonly Dictionary<char, bool> YesNoBoolMap = new Dictionary<char, bool>
+        {
+            { 'Y', true },
+            { 'y', true },
+            { 'N', false },
+            { 'N', false },
+        };
 
         public ConsoleInputDevice(
             IOutputDevice outputDevice,
@@ -69,6 +76,12 @@ namespace RockPaperScissors.IO
                     !_gameState.CancellationToken.IsCancellationRequested);
 
             return responseChar;
+        }
+
+        public async Task<bool> CheckForNewGame()
+        {
+            var key = await GetKeyInput(false, 'Y', 'N', 'y', 'n');
+            return YesNoBoolMap[key];
         }
     }
 }
