@@ -16,12 +16,12 @@ namespace RockPaperScissors
             _stateRepository = stateRepository;
         }
 
-        public async Task ChangeFlowState(GameFlowState state)
+        public async Task ChangeFlowState(GameFlowState flowState)
         {
-            _gameFlowState = state;
+            _gameFlowState = flowState;
             while(_gameFlowState != GameFlowState.Stopped)
             {
-                var stateManager = await _stateRepository.GetStateManager(state);
+                var stateManager = await _stateRepository.GetStateManager(_gameFlowState);
                 _gameFlowState = await stateManager.EnterState();
             }
         }

@@ -8,14 +8,14 @@ namespace RockPaperScissors
 {
     public class StateChangeManagerRepository : IStateChangeManagerRepository
     {
-        private readonly IEnumerable<IStateManager> _states;
+        private readonly IEnumerable<IFlowStateManager> _states;
 
-        public StateChangeManagerRepository(IEnumerable<IStateManager> states)
+        public StateChangeManagerRepository(IEnumerable<IFlowStateManager> states)
         {
             _states = states;
         }
 
-        public Task<IStateManager> GetStateManager(GameFlowState state)
+        public Task<IFlowStateManager> GetStateManager(GameFlowState state)
         {
             var stateManager = _states.FirstOrDefault(i => i.ManagedState == state);
             if (stateManager == null)

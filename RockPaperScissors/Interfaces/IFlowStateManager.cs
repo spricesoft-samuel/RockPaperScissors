@@ -2,7 +2,7 @@
 
 namespace RockPaperScissors.Interfaces
 {
-    public interface IStateManager
+    public interface IFlowStateManager
     {
         GameFlowState ManagedState { get; }
         Task<GameFlowState> EnterState();

@@ -11,9 +11,9 @@ namespace RockPaperScissors.Tests.Unit
         public async Task GetOutputForNewState_Returns_From_Resource_Started()
         {
             // Arrange
-            var mockStartingStateManager = new Mock<IStateManager>();
+            var mockStartingStateManager = new Mock<IFlowStateManager>();
             mockStartingStateManager.SetupGet(i => i.ManagedState).Returns(GameFlowState.Starting);
-            var mockStoppingStateManager = new Mock<IStateManager>();
+            var mockStoppingStateManager = new Mock<IFlowStateManager>();
             mockStoppingStateManager.SetupGet(i => i.ManagedState).Returns(GameFlowState.Stopping);
             var sut = new StateChangeManagerRepository(new[] 
             {

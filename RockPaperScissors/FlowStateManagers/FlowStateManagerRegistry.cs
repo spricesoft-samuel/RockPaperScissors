@@ -7,7 +7,8 @@ namespace RockPaperScissors.StateManagers
     {
         public static void RegisterStateManagers(this IServiceCollection services)
         {
-            services.AddTransient<IStateManager, StartingFlowStateManager>();
+            services.AddTransient<IFlowStateManager, StartingFlowStateManager>();
+            services.AddTransient<IFlowStateManager, StoppingFlowStateManager>();
         }
     }
 }

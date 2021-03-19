@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissors.StateManagers
 {
-    public class StartingFlowStateManager : IStateManager
+    public class StartingFlowStateManager : IFlowStateManager
     {
         private readonly IOutputDevice _outputDevice;
 
