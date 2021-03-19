@@ -3,6 +3,7 @@ using NUnit.Framework;
 using RockPaperScissors.Interfaces;
 using RockPaperScissors.Models;
 using RockPaperScissors.StateManagers;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RockPaperScissors.Tests.Unit.StateManagers
@@ -41,7 +42,7 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
             inputDevice.Verify(i => i.GetHandInput(gameState.Players[1]), Times.Never);
             Assert.AreEqual(expected, gameState.Players[0].HandType);
             CollectionAssert.IsSubsetOf(new[] { gameState.Players[1].HandType }, ValidInGameHandTypes);
-            Assert.AreEqual(GameFlowState.Stopping, result);
+            Assert.AreEqual(GameFlowState.DeclareResult, result);
         }
 
         [TestCase(HandType.Rock, HandType.Rock)]
@@ -79,7 +80,45 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
             inputDevice.Verify(i => i.GetHandInput(gameState.Players[1]), Times.Once);
             Assert.AreEqual(expectedP1, gameState.Players[0].HandType);
             Assert.AreEqual(expectedP2, gameState.Players[1].HandType);
-            Assert.AreEqual(GameFlowState.Stopping, result);
+            Assert.AreEqual(GameFlowState.DeclareResult, result);
+        }
+
+
+        [Test]
+        public async Task EnterState_Cpu_RandomTest()
+        {
+
+            // Act
+            // try 500 times
+            var results = await Task.WhenAll(
+                Enumerable.Range(1, 500)
+                .Select(i => RunRandTest())
+                .ToList()
+            );
+
+            // Assert
+            CollectionAssert.Contains(results, HandType.Rock);
+            CollectionAssert.Contains(results, HandType.Paper);
+            CollectionAssert.Contains(results, HandType.Scissors);
+        }
+
+        private async Task<HandType> RunRandTest()
+        {
+
+            // Arrange
+            var gameState = new GameState
+            {
+                Players = new[] { new Player(), new Player { IsCpu = true } },
+                NumberOfPlayers = 1,
+            };
+            var inputDevice = new Mock<IInputDevice>();
+            inputDevice.Setup(i => i.GetHandInput(gameState.Players[0])).ReturnsAsync(HandType.Rock);
+            var outputDevice = new Mock<IOutputDevice>();
+            var sut = new ChooseHandStateManager(inputDevice.Object, outputDevice.Object, gameState);
+
+            await sut.EnterState();
+
+            return gameState.Players[1].HandType;
         }
     }
 }

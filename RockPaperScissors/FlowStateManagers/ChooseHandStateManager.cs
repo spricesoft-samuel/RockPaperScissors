@@ -41,13 +41,13 @@ namespace RockPaperScissors.StateManagers
                 _gameState.PlayersTurn += 1;
             }
 
-            return GameFlowState.Stopping;
+            return GameFlowState.DeclareResult;
         }
 
         private HandType ChooseCpuHand()
         {
             var rand = new Random();
-            var randomInt = rand.Next(1, 3);
+            var randomInt = rand.Next(1, 4);
             return (HandType)randomInt;
         }
     }
