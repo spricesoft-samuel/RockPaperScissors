@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using RockPaperScissors.Interfaces;
+using RockPaperScissors.Models;
 using System.Threading.Tasks;
 
 namespace RockPaperScissors.Tests.Unit

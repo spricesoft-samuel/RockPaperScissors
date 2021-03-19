@@ -7,6 +7,6 @@ namespace RockPaperScissors.Models
         public GameFlowState FlowState { get; set; }
         public CancellationToken CancellationToken { get; set; }
         public int NumberOfPlayers { get; set; }
-        public string[] PlayerNames { get; set; }
+        public Player[] Players { get; set; }
     }
 }

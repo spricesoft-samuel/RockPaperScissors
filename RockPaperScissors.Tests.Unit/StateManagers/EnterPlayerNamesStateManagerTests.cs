@@ -26,8 +26,8 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
             // Assert
             outputDevice.Verify(i => i.WriteText(GameResources.EnterNames, new[] { "1" }));
             inputDevice.Verify(i => i.GetUserInput());
-            Assert.AreEqual(1, gameState.PlayerNames.Length);
-            Assert.AreEqual(sampleName, gameState.PlayerNames[0]);
+            Assert.AreEqual(1, gameState.Players.Length);
+            Assert.AreEqual(sampleName, gameState.Players[0].Name);
             Assert.AreEqual(GameFlowState.Stopping, result);
         }
         [Test]
@@ -51,9 +51,9 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
             outputDevice.Verify(i => i.WriteText(GameResources.EnterNames, new[] { "1" }));
             outputDevice.Verify(i => i.WriteText(GameResources.EnterNames, new[] { "2" }));
             inputDevice.Verify(i => i.GetUserInput());
-            Assert.AreEqual(2, gameState.PlayerNames.Length);
-            Assert.AreEqual(sampleNames[0], gameState.PlayerNames[0]);
-            Assert.AreEqual(sampleNames[1], gameState.PlayerNames[1]);
+            Assert.AreEqual(2, gameState.Players.Length);
+            Assert.AreEqual(sampleNames[0], gameState.Players[0].Name);
+            Assert.AreEqual(sampleNames[1], gameState.Players[1].Name);
             Assert.AreEqual(GameFlowState.Stopping, result);
         }
     }

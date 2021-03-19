@@ -1,4 +1,5 @@
 ﻿using RockPaperScissors.Interfaces;
+using RockPaperScissors.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,5 +1,6 @@
 ﻿using RockPaperScissors.Interfaces;
 using RockPaperScissors.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RockPaperScissors.StateManagers
@@ -24,13 +25,14 @@ namespace RockPaperScissors.StateManagers
 
         public async Task<GameFlowState> EnterState()
         {
-            _gameState.PlayerNames = new string[_gameState.NumberOfPlayers];
+            _gameState.Players = Enumerable.Range(1, _gameState.NumberOfPlayers)
+                .Select(i => new Player()).ToArray();
 
             for (var i = 0; i < _gameState.NumberOfPlayers; i++)
             {
                 await _outputDevice.WriteText(GameResources.EnterNames, (i + 1).ToString());
 
-                _gameState.PlayerNames[i] = await _inputDevice.GetUserInput();
+                _gameState.Players[i].Name = await _inputDevice.GetUserInput();
 
             }
             

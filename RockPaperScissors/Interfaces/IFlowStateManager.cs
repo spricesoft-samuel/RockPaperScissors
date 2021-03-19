@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using RockPaperScissors.Models;
+using System.Threading.Tasks;
 
 namespace RockPaperScissors.Interfaces
 {
