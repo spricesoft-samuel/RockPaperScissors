@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RockPaperScissors.Interfaces;
+using RockPaperScissors.Models;
 using RockPaperScissors.StateManagers;
 using System;
 using System.IO;
@@ -12,8 +13,10 @@ namespace RockPaperScissors
     {
         public static void Register(IServiceCollection services)
         {
+            services.AddSingleton<GameState>();
             services.AddHostedService<GameHost>();
             services.AddSingleton<IOutputDevice, ConsoleOutputDevice>();
+            services.AddSingleton<IInputDevice, ConsoleInputDevice>();
             services.AddSingleton<IStateChangeManagerRepository, StateChangeManagerRepository>();
             services.AddSingleton<IGameStateManager, GameStateManager>();
             services.RegisterStateManagers();

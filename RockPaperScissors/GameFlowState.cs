@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RockPaperScissors
+﻿namespace RockPaperScissors
 {
     public enum GameFlowState
     {
         Unset = 0,
         Starting,
-        WaitingForConfiguration,
+        ChooseNumberOfPlayers,
         Stopping,
-        Stopped
+        Stopped,
     }
 }

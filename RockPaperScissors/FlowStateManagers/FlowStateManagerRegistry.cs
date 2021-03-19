@@ -9,6 +9,7 @@ namespace RockPaperScissors.StateManagers
         {
             services.AddTransient<IFlowStateManager, StartingFlowStateManager>();
             services.AddTransient<IFlowStateManager, StoppingFlowStateManager>();
+            services.AddTransient<IFlowStateManager, ChoosePlayerNumberStateManager>();
         }
     }
 }

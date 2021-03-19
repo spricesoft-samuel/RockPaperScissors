@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using RockPaperScissors.Interfaces;
+using RockPaperScissors.Models;
 using System.Threading.Tasks;
 
 namespace RockPaperScissors.Tests.Unit
@@ -11,8 +12,9 @@ namespace RockPaperScissors.Tests.Unit
         public async Task GameStateManger_ChangeFlowState_StateStopped_DoesNothing()
         {
             // Arrange
+            var state = new GameState();
             var stateRepository = new Mock<IStateChangeManagerRepository>();
-            var sut = new GameStateManager(stateRepository.Object);
+            var sut = new GameStateManager(stateRepository.Object, state);
 
             // Act
             await sut.ChangeFlowState(GameFlowState.Stopped);
@@ -25,12 +27,13 @@ namespace RockPaperScissors.Tests.Unit
         public async Task GameStateManger_ChangeFlowState_StateStarted_GetsNewStateFromCurrent()
         {
             // Arrange
+            var state = new GameState();
             var mockStateManager = new Mock<IFlowStateManager>();
             mockStateManager.Setup(i => i.EnterState()).ReturnsAsync(GameFlowState.Stopped);
             var stateRepository = new Mock<IStateChangeManagerRepository>();
             stateRepository.Setup(i => i.GetStateManager(GameFlowState.Starting))
                 .ReturnsAsync(mockStateManager.Object);
-            var sut = new GameStateManager(stateRepository.Object);
+            var sut = new GameStateManager(stateRepository.Object, state);
 
             // Act
             await sut.ChangeFlowState(GameFlowState.Starting);
@@ -46,8 +49,9 @@ namespace RockPaperScissors.Tests.Unit
         public async Task GameStateManger_ChangeFlowState_LoopsOnlyUntilFlowState_IsStopped()
         {
             // Arrange
+            var state = new GameState();
             var state1 = new Mock<IFlowStateManager>();
-            state1.Setup(i => i.EnterState()).ReturnsAsync(GameFlowState.WaitingForConfiguration);
+            state1.Setup(i => i.EnterState()).ReturnsAsync(GameFlowState.ChooseNumberOfPlayers);
             var state2 = new Mock<IFlowStateManager>();
             state2.Setup(i => i.EnterState()).ReturnsAsync(GameFlowState.Stopping);
             var state3 = new Mock<IFlowStateManager>();
@@ -56,12 +60,12 @@ namespace RockPaperScissors.Tests.Unit
             var stateRepository = new Mock<IStateChangeManagerRepository>();
             stateRepository.Setup(i => i.GetStateManager(GameFlowState.Starting))
                 .ReturnsAsync(state1.Object);
-            stateRepository.Setup(i => i.GetStateManager(GameFlowState.WaitingForConfiguration))
+            stateRepository.Setup(i => i.GetStateManager(GameFlowState.ChooseNumberOfPlayers))
                 .ReturnsAsync(state2.Object);
             stateRepository.Setup(i => i.GetStateManager(GameFlowState.Stopping))
                 .ReturnsAsync(state3.Object);
 
-            var sut = new GameStateManager(stateRepository.Object);
+            var sut = new GameStateManager(stateRepository.Object, state);
 
             // Act
             await sut.ChangeFlowState(GameFlowState.Starting);
@@ -77,20 +81,21 @@ namespace RockPaperScissors.Tests.Unit
 
 
         [TestCase(GameFlowState.Starting)]
-        [TestCase(GameFlowState.WaitingForConfiguration)]
+        [TestCase(GameFlowState.ChooseNumberOfPlayers)]
         [TestCase(GameFlowState.Stopping)]
         public async Task GameStateManger_GetFlowState_ReturnsPreviouslySetState(GameFlowState testState)
         {
             // Arrange
-            GameFlowState setState = GameFlowState.Unset;
+            var state = new GameState();
+            state.FlowState = GameFlowState.Unset;
             var stateRepository = new Mock<IStateChangeManagerRepository>();
             var mockStateManager = new Mock<IFlowStateManager>();
             stateRepository.Setup(i => i.GetStateManager(It.IsAny<GameFlowState>())).ReturnsAsync(mockStateManager.Object);
-            var sut = new GameStateManager(stateRepository.Object);
+            var sut = new GameStateManager(stateRepository.Object, state);
             mockStateManager.Setup(i => i.EnterState())
                 .Callback(async () => 
                 {
-                    setState = await sut.GetFlowState();
+                    state.FlowState = await sut.GetFlowState();
                 })
                 .ReturnsAsync(GameFlowState.Stopped);
 
@@ -100,7 +105,7 @@ namespace RockPaperScissors.Tests.Unit
             await sut.GetFlowState();
 
             // Assert
-            Assert.AreEqual(testState, setState);
+            Assert.AreEqual(testState, state.FlowState);
         }
     }
 }

@@ -15,15 +15,16 @@ namespace RockPaperScissors
             _states = states;
         }
 
-        public Task<IFlowStateManager> GetStateManager(GameFlowState state)
+        public Task<IFlowStateManager> GetStateManager(GameFlowState flowState)
         {
-            var stateManager = _states.FirstOrDefault(i => i.ManagedState == state);
-            if (stateManager == null)
+            var stateManager = _states.Where(i => i.ManagedState == flowState).ToList();
+            if (stateManager.Count() != 1)
             {
-                throw new InvalidProgramException("There should be exactly one manager for each state");
+                throw new InvalidProgramException(
+                    "There should be exactly one manager for each state, error flowState:" + flowState);
             }
 
-            return Task.FromResult(stateManager);
+            return Task.FromResult(stateManager.First());
         }
     }
 }

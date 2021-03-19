@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace RockPaperScissors.Interfaces
 {
@@ -6,5 +7,6 @@ namespace RockPaperScissors.Interfaces
     {
         Task ChangeFlowState(GameFlowState state);
         Task<GameFlowState> GetFlowState();
+        void Start(CancellationToken cancellationToken);
     }
 }

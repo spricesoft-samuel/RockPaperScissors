@@ -19,7 +19,7 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
             var result = await sut.EnterState();
 
             // Assert
-            Assert.AreEqual(GameFlowState.WaitingForConfiguration, result);
+            Assert.AreEqual(GameFlowState.ChooseNumberOfPlayers, result);
             outputDevice.Verify(i => i.WriteText(GameResources.WelcomeBanner));
         }
     }

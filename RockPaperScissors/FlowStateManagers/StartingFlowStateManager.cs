@@ -17,7 +17,7 @@ namespace RockPaperScissors.StateManagers
         public async Task<GameFlowState> EnterState()
         {
             await _outputDevice.WriteText(GameResources.WelcomeBanner);
-            return GameFlowState.WaitingForConfiguration;
+            return GameFlowState.ChooseNumberOfPlayers;
         }
     }
 }

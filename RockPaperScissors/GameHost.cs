@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissors
 {
-    public class GameHost : IHostedService
+    public class GameHost : BackgroundService
     {
         private readonly IGameStateManager _gameStateManager;
 
@@ -14,14 +14,10 @@ namespace RockPaperScissors
             _gameStateManager = gameStateManager;
         }
 
-        public async Task StartAsync(CancellationToken cancellationToken = default)
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await _gameStateManager.ChangeFlowState(GameFlowState.Starting);
-        }
-
-        public async Task StopAsync(CancellationToken cancellationToken = default)
-        {
-            await _gameStateManager.ChangeFlowState(GameFlowState.Stopping);
+            _gameStateManager.Start(stoppingToken);
+            return Task.CompletedTask;
         }
     }
 }
