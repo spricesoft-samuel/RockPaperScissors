@@ -13,7 +13,9 @@ namespace RockPaperScissors.StateManagers
             services.AddTransient<IFlowStateManager, ChoosePlayerNumberStateManager>();
             services.AddTransient<IFlowStateManager, EnterPlayerNamesStateManager>();
             services.AddTransient<IFlowStateManager, ChooseHandStateManager>();
-            services.AddTransient<IFlowStateManager, DeclareResultStateManager>();
+            services.AddTransient<IFlowStateManager, DeclareRoundResultStateManager>();
+            services.AddTransient<IFlowStateManager, DeclareMidResultStateManager>();
+            services.AddTransient<IFlowStateManager, DeclareFinalResultStateManager>();
         }
     }
 }

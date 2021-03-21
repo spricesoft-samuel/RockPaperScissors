@@ -22,6 +22,8 @@ namespace RockPaperScissors
         public void Start(CancellationToken cancellationToken)
         {
             _gameState.CancellationToken = cancellationToken;
+            // Had a lot of issues with the host not stopping, need to investigate.
+            // This not waiting for this initial async task helps
             var game = ChangeFlowState(GameFlowState.Starting);
         }
 

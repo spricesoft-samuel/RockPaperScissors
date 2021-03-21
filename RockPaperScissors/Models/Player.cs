@@ -6,5 +6,6 @@
         public int Number { get; set; }
         public bool IsCpu { get; set; }
         public HandType HandType { get; set; }
+        public int RoundsWon { get; set; }
     }
 }

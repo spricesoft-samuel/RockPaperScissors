@@ -41,7 +41,7 @@ namespace RockPaperScissors.StateManagers
                 _gameState.PlayersTurn += 1;
             }
 
-            return GameFlowState.DeclareResult;
+            return GameFlowState.DeclareRoundResult;
         }
 
         private HandType ChooseCpuHand()

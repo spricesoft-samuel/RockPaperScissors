@@ -1,6 +1,5 @@
 ﻿using RockPaperScissors.Interfaces;
 using RockPaperScissors.Models;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RockPaperScissors.StateManagers

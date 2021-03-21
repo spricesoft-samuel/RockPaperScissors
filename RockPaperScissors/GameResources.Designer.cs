@@ -87,16 +87,17 @@ namespace RockPaperScissors {
         ///
         ///{4}
         ///
-        ///So the winner is...
+        ///So the winner of this round is...
         ///
         ///Player {5}
         ///
         ///
+        ///
         ///.
         /// </summary>
-        internal static string DeclareResults {
+        internal static string DeclareRoundResults {
             get {
-                return ResourceManager.GetString("DeclareResults", resourceCulture);
+                return ResourceManager.GetString("DeclareRoundResults", resourceCulture);
             }
         }
         
@@ -120,11 +121,51 @@ namespace RockPaperScissors {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player {0} won by {1} rounds to {2}
+        ///.
+        /// </summary>
+        internal static string FinalResults {
+            get {
+                return ResourceManager.GetString("FinalResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid input, please enter one of the following: {0}.
         /// </summary>
         internal static string InvalidInputText {
             get {
                 return ResourceManager.GetString("InvalidInputText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to So far both players have won {0} rounds each so its all to play for.
+        ///.
+        /// </summary>
+        internal static string MidResultsDraw {
+            get {
+                return ResourceManager.GetString("MidResultsDraw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player {0} leads by {1} rounds to {2}
+        ///.
+        /// </summary>
+        internal static string MidResultsWinner {
+            get {
+                return ResourceManager.GetString("MidResultsWinner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next round...
+        ///.
+        /// </summary>
+        internal static string NextRound {
+            get {
+                return ResourceManager.GetString("NextRound", resourceCulture);
             }
         }
         
@@ -151,7 +192,6 @@ namespace RockPaperScissors {
         
         /// <summary>
         ///   Looks up a localized string similar to Welcome to Rock Paper Scissors
-        ///Press Ctrl+C to end at any time
         ///
         ///Game Rules:
         ///

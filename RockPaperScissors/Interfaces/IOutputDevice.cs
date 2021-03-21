@@ -13,7 +13,11 @@ namespace RockPaperScissors.Interfaces
         Task AdvisePlayer2IsCpu();
         Task DisplayInputError(string errorTemplate, params object[] errorArgs);
 
-        Task DeclareResult(GameResult gameResult);
+        Task DeclareRoundResult(GameResult gameResult);
+        Task DeclareMidResultDraw(int roundsDrawn);
+        Task DeclareMidResultWinner(Player winning, Player losing);
+        Task NextRound();
+        Task DeclareFinalResult(Player winner, Player loser);
         Task PromptForNewGame();
     }
 }

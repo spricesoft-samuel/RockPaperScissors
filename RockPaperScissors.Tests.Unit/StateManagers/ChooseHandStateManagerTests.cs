@@ -42,7 +42,7 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
             inputDevice.Verify(i => i.GetHandInput(gameState.Players[1]), Times.Never);
             Assert.AreEqual(expected, gameState.Players[0].HandType);
             CollectionAssert.IsSubsetOf(new[] { gameState.Players[1].HandType }, ValidInGameHandTypes);
-            Assert.AreEqual(GameFlowState.DeclareResult, result);
+            Assert.AreEqual(GameFlowState.DeclareRoundResult, result);
         }
 
         [TestCase(HandType.Rock, HandType.Rock)]
@@ -80,7 +80,7 @@ namespace RockPaperScissors.Tests.Unit.StateManagers
             inputDevice.Verify(i => i.GetHandInput(gameState.Players[1]), Times.Once);
             Assert.AreEqual(expectedP1, gameState.Players[0].HandType);
             Assert.AreEqual(expectedP2, gameState.Players[1].HandType);
-            Assert.AreEqual(GameFlowState.DeclareResult, result);
+            Assert.AreEqual(GameFlowState.DeclareRoundResult, result);
         }
 
 

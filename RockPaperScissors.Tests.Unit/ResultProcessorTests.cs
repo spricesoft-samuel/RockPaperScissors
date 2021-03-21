@@ -9,29 +9,29 @@ namespace RockPaperScissors.Tests.Unit
 {
     public class ResultProcessorTests
     {
-        [TestCase(HandType.Rock, HandType.Rock, ResultProcessor.ITS_A_DRAW, ResultProcessor.NO_WINNER)]
-        [TestCase(HandType.Paper, HandType.Paper, ResultProcessor.ITS_A_DRAW, ResultProcessor.NO_WINNER)]
-        [TestCase(HandType.Scissors, HandType.Scissors, ResultProcessor.ITS_A_DRAW, ResultProcessor.NO_WINNER)]
+        [TestCase(HandType.Rock, HandType.Rock, ResultProcessor.ITS_A_DRAW, null)]
+        [TestCase(HandType.Paper, HandType.Paper, ResultProcessor.ITS_A_DRAW, null)]
+        [TestCase(HandType.Scissors, HandType.Scissors, ResultProcessor.ITS_A_DRAW, null)]
 
-        [TestCase(HandType.Rock, HandType.Paper, ResultProcessor.PAPER_BEATS_ROCK, "p2")]
-        [TestCase(HandType.Paper, HandType.Rock, ResultProcessor.PAPER_BEATS_ROCK, "p1")]
-        [TestCase(HandType.Scissors, HandType.Paper, ResultProcessor.SCISSORS_BEATS_PAPER, "p1")]
-        [TestCase(HandType.Paper, HandType.Scissors, ResultProcessor.SCISSORS_BEATS_PAPER, "p2")]
-        [TestCase(HandType.Scissors, HandType.Rock, ResultProcessor.ROCK_BEATS_SCISSORS, "p2")]
-        [TestCase(HandType.Rock, HandType.Scissors, ResultProcessor.ROCK_BEATS_SCISSORS, "p1")]
+        [TestCase(HandType.Rock, HandType.Paper, ResultProcessor.PAPER_BEATS_ROCK, 2)]
+        [TestCase(HandType.Paper, HandType.Rock, ResultProcessor.PAPER_BEATS_ROCK, 1)]
+        [TestCase(HandType.Scissors, HandType.Paper, ResultProcessor.SCISSORS_BEATS_PAPER, 1)]
+        [TestCase(HandType.Paper, HandType.Scissors, ResultProcessor.SCISSORS_BEATS_PAPER, 2)]
+        [TestCase(HandType.Scissors, HandType.Rock, ResultProcessor.ROCK_BEATS_SCISSORS, 2)]
+        [TestCase(HandType.Rock, HandType.Scissors, ResultProcessor.ROCK_BEATS_SCISSORS, 1)]
         public async Task ProcessGameStateResult_ExpectedResults(
             HandType p1Hand, 
             HandType p2hand,
             string expectedResultReason,
-            string expectedWinner)
+            int? expectedWinner)
         {
             // Arrange
             var gameState = new GameState
             {
                 Players = new[] 
                 {
-                    new Player { HandType = p1Hand, Name = "p1" },
-                    new Player { HandType = p2hand, Name = "p2" }
+                    new Player { HandType = p1Hand, Name = "p1", Number = 1 },
+                    new Player { HandType = p2hand, Name = "p2", Number = 2 }
                 },
             };
             var sut = new ResultProcessor();
@@ -41,7 +41,7 @@ namespace RockPaperScissors.Tests.Unit
 
             // Assert
             Assert.AreEqual(expectedResultReason, result.ResultReason);
-            Assert.AreEqual(expectedWinner, result.WinningPlayerName);
+            Assert.AreEqual(expectedWinner, result.WinningPlayer?.Number);
         }
     }
 }

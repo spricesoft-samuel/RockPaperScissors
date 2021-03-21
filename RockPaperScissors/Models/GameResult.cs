@@ -3,7 +3,7 @@
     public class GameResult
     {
         public Player[] Players { get; set; }
-        public string WinningPlayerName { get; set; }
+        public Player WinningPlayer { get; set; }
         public string ResultReason { get; set; }
     }
 }

@@ -3,8 +3,9 @@ Player {2} chose {3}
 
 {4}
 
-So the winner is...
+So the winner of this round is...
 
-Player {5}
+{5}
+
 
 

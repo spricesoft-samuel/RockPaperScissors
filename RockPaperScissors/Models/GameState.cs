@@ -9,7 +9,5 @@ namespace RockPaperScissors.Models
         public int NumberOfPlayers { get; set; }
         public Player[] Players { get; set; }
         public int PlayersTurn { get; set; }
-        public string WinningPlayerName { get; set; }
-        public string ResultReason { get; set; }
     }
 }

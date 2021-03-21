@@ -14,21 +14,53 @@ namespace RockPaperScissors.IO
             return Task.CompletedTask;
         }
 
-        public Task DeclareResult(GameResult gameResult)
+        public Task DeclareFinalResult(Player winner, Player loser)
         {
-            Console.WriteLine(GameResources.DeclareResults,
+            Console.WriteLine(GameResources.FinalResults,
+                winner.Name,
+                winner.RoundsWon,
+                loser.RoundsWon);
+            return Task.CompletedTask;
+        }
+
+        public Task DeclareMidResultDraw(int roundsDrawn)
+        {
+            Console.WriteLine(GameResources.MidResultsDraw, roundsDrawn);
+            return Task.CompletedTask;
+        }
+
+        public Task DeclareMidResultWinner(Player winning, Player losing)
+        {
+            Console.WriteLine(GameResources.MidResultsWinner,
+                winning.Name,
+                winning.RoundsWon,
+                losing.RoundsWon);
+            return Task.CompletedTask;
+        }
+
+        public Task DeclareRoundResult(GameResult gameResult)
+        {
+            Console.Clear();
+            var winningPlayerName = gameResult.WinningPlayer?.Name ?? "Neither it was a draw";
+            Console.WriteLine(GameResources.DeclareRoundResults,
                 gameResult.Players[0].Name,
                 gameResult.Players[0].HandType,
                 gameResult.Players[1].Name,
                 gameResult.Players[1].HandType,
                 gameResult.ResultReason,
-                gameResult.WinningPlayerName);
+                winningPlayerName);
             return Task.CompletedTask;
         }
 
         public Task DisplayInputError(string errorTemplate, params object[] errorArgs)
         {
             Console.WriteLine(errorTemplate, errorArgs);
+            return Task.CompletedTask;
+        }
+
+        public Task NextRound()
+        {
+            Console.WriteLine(GameResources.NextRound);
             return Task.CompletedTask;
         }
 

@@ -48,7 +48,7 @@ namespace RockPaperScissors
             var result = new GameResult { Players = gameState.Players };
             if (gameState.Players[0].HandType == gameState.Players[1].HandType)
             {
-                result.WinningPlayerName = NO_WINNER;
+                result.WinningPlayer = null;
                 result.ResultReason = ITS_A_DRAW;
             }
             else
@@ -60,7 +60,8 @@ namespace RockPaperScissors
                 };
                 var resultCombo = ResultMatrix[stateCombo];
                 result.ResultReason = resultCombo.Reason;
-                result.WinningPlayerName = gameState.Players[resultCombo.Winner].Name;
+                result.WinningPlayer = gameState.Players[resultCombo.Winner];
+                result.WinningPlayer.RoundsWon += 1;
             }
             return Task.FromResult(result);
         }
